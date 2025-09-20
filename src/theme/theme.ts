@@ -36,11 +36,7 @@ const theme = createTheme({
       primary: gray[900],
       secondary: gray[600],
     },
-    brand,
-    gray,
-    error,
-    success,
-    warning,
+ 
   },
 });
 
