@@ -1,4 +1,5 @@
 import { Button, ButtonProps } from "@mui/material";
+import { typography } from "./typography";
 
 interface TextPrimaryButtonProps extends ButtonProps {
   children: React.ReactNode;
@@ -13,10 +14,8 @@ export const TextPrimaryButton = ({
       variant="text"
       sx={{
         color: "#0068A9",
-        fontFamily: "Open Sans, sans-serif",
-        fontWeight: 500,
-        fontSize: "18px",
-        lineHeight: "22px",
+        fontFamily: typography.fontFamily,
+        ...typography["button.Large"],
         textTransform: "none",
         borderRadius: "8px",
         padding: "12px 24px",

@@ -6,11 +6,27 @@ interface OutlinedPrimaryButtonProps extends ButtonProps {
 
 export const OutlinedPrimaryButton = ({
   children,
+  size = "medium",
   ...props
 }: OutlinedPrimaryButtonProps) => {
+
+  const getPadding = () => {
+    switch (size) {
+      case "small":
+        return "6px 18px"; 
+      case "large":
+        return "12px 24px"; 
+      case "medium":
+      default:
+        return "20px 10px"; 
+    }
+  };
+
   return (
     <Button
       variant="outlined"
+      size={size}
+      disableRipple
       sx={{
         border: "1.5px solid #0068A9",
         color: "#0068A9",
@@ -20,7 +36,7 @@ export const OutlinedPrimaryButton = ({
         lineHeight: "22px",
         textTransform: "none",
         borderRadius: "8px",
-        padding: "10px 22px",
+        padding: getPadding(),
         backgroundColor: "transparent",
         boxShadow: "none",
         "&:hover": {
@@ -34,7 +50,8 @@ export const OutlinedPrimaryButton = ({
           borderColor: "#90C4FB",
         },
         "&:focus": {
-          boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
+          outline: "none",
+          boxShadow: "none",
         },
       }}
       {...props}
