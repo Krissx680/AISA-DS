@@ -1,4 +1,5 @@
 import { Button, ButtonProps } from "@mui/material";
+import { brand, neutral } from "./theme/colorTokens";
 
 interface OutlinedPrimaryButtonProps extends ButtonProps {
   children: React.ReactNode;
@@ -13,12 +14,12 @@ export const OutlinedPrimaryButton = ({
   const getPadding = () => {
     switch (size) {
       case "small":
-        return "6px 18px"; 
+        return "8px 16px"; 
       case "large":
         return "12px 24px"; 
       case "medium":
       default:
-        return "20px 10px"; 
+        return "10px 20px"; 
     }
   };
 
@@ -39,15 +40,16 @@ export const OutlinedPrimaryButton = ({
         padding: getPadding(),
         backgroundColor: "transparent",
         boxShadow: "none",
-        "&:hover": {
-          backgroundColor: "rgba(188, 217, 255, 0.3)",
-          borderColor: "#387CBB",
-          color: "#387CBB",
+       "&:hover": {
+          backgroundColor: "rgba(188, 217, 255, 0.3)", 
+          borderColor: brand[300], 
+          color: brand[300], 
         },
         "&:active": {
           boxShadow: "none",
-          backgroundColor: "rgba(188, 217, 255, 0.3)",
-          borderColor: "#90C4FB",
+          backgroundColor: "rgba(0, 104, 169, 0.2)", 
+          borderColor: brand[300],
+          color: brand[300],
         },
         "&:focus": {
           outline: "none",
