@@ -1,101 +1,118 @@
-import { PrimaryButton } from './PrimaryButton';
+import React from 'react';
 
 export default {
-  title: 'Components/PrimaryButton',
-  component: PrimaryButton,
+  title: 'Components/Buttons/Primary',
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
   argTypes: {
-    children: {
-      control: 'text',
-      description: 'Button content',
-    },
-    disabled: {
-      control: 'boolean',
-      description: 'Whether the button is disabled',
-    },
-    disableRipple: {
-      control: 'boolean',
-      description: 'Whether to disable the ripple effect',
+    variant: {
+      control: { type: 'select' },
+      options: ['contained', 'outlined', 'text'],
+      description: 'Visual style variant of the button',
     },
     size: {
-      control: 'select',
+      control: { type: 'select' },
       options: ['small', 'medium', 'large'],
-      description: 'Button size',
+      description: 'Size of the button (not available for text variant)',
     },
-    fullWidth: {
-      control: 'boolean',
-      description: 'Whether the button takes full width',
+    disabled: {
+      control: { type: 'boolean' },
+      description: 'Whether the button is disabled',
     },
-    onClick: {
-      action: 'clicked',
-      description: 'Click handler',
+    children: {
+      control: { type: 'text' },
+      description: 'Button content',
     },
+    onClick: { action: 'clicked' },
   },
 };
 
-// Default story
-export const Default = {
-  args: {
-    children: 'Primary Button',
-  },
+
+import { PrimaryButton } from './PrimaryButton';
+import { OutlinedPrimaryButton } from './OutlinedPrimaryButton';
+import { TextPrimaryButton } from './TextPrimaryButton';
+
+const Template = (args) => {
+  const { variant, children, size, disabled, onClick, ...otherProps } = args;
+  
+  const commonProps = {
+    disabled,
+    onClick,
+    ...otherProps
+  };
+  
+  switch (variant) {
+    case 'outlined':
+      return React.createElement(OutlinedPrimaryButton, {
+        size: size,
+        ...commonProps
+      }, children);
+    case 'text':
+      return React.createElement(TextPrimaryButton, commonProps, children);
+    case 'contained':
+    default:
+      return React.createElement(PrimaryButton, {
+        size: size,
+        ...commonProps
+      }, children);
+  }
 };
 
-// Disabled state
-export const Disabled = {
-  args: {
-    children: 'Disabled Button',
-    disabled: true,
-  },
+// Default interactive story
+export const Default = Template.bind({});
+Default.args = {
+  variant: 'contained',
+  size: 'medium',
+  children: 'Primary Button',
+  disabled: false,
 };
 
-// Without ripple effect
-export const NoRipple = {
-  args: {
-    children: 'No Ripple',
-    disableRipple: true,
-  },
-};
+// Individual variant stories
+export const Contained = () => 
+  React.createElement(PrimaryButton, { size: 'medium' }, 'Contained Primary');
 
-// Different sizes
-export const Small = {
-  args: {
-    children: 'Small Button',
-    size: 'small',
-  },
-};
+export const Outlined = () => 
+  React.createElement(OutlinedPrimaryButton, { size: 'medium' }, 'Outlined Primary');
 
-export const Medium = {
-  args: {
-    children: 'Medium Button',
-    size: 'medium',
-  },
-};
+export const Text = () => 
+  React.createElement(TextPrimaryButton, null, 'Text Primary');
 
-export const Large = {
-  args: {
-    children: 'Large Button',
-    size: 'large',
-  },
-};
+// All variants showcase
+export const AllVariants = () => 
+  React.createElement('div', {
+    style: { display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }
+  }, [
+    React.createElement(PrimaryButton, { key: 'contained' }, 'Contained'),
+    React.createElement(OutlinedPrimaryButton, { key: 'outlined' }, 'Outlined'),
+    React.createElement(TextPrimaryButton, { key: 'text' }, 'Text')
+  ]);
 
-// Full width
-export const FullWidth = {
-  args: {
-    children: 'Full Width Button',
-    fullWidth: true,
-  },
-  parameters: {
-    layout: 'padded',
-  },
-};
+// Size variants
+export const ContainedSizes = () => 
+  React.createElement('div', {
+    style: { display: 'flex', gap: '16px', alignItems: 'center' }
+  }, [
+    React.createElement(PrimaryButton, { key: 'small', size: 'small' }, 'Small'),
+    React.createElement(PrimaryButton, { key: 'medium', size: 'medium' }, 'Medium'),
+    React.createElement(PrimaryButton, { key: 'large', size: 'large' }, 'Large')
+  ]);
 
-// Interactive example
-export const Interactive = {
-  args: {
-    children: 'Click me!',
-    onClick: () => alert('Button clicked!'),
-  },
-};
+export const OutlinedSizes = () => 
+  React.createElement('div', {
+    style: { display: 'flex', gap: '16px', alignItems: 'center' }
+  }, [
+    React.createElement(OutlinedPrimaryButton, { key: 'small', size: 'small' }, 'Small'),
+    React.createElement(OutlinedPrimaryButton, { key: 'medium', size: 'medium' }, 'Medium'),
+    React.createElement(OutlinedPrimaryButton, { key: 'large', size: 'large' }, 'Large')
+  ]);
+
+// Disabled states
+export const DisabledStates = () => 
+  React.createElement('div', {
+    style: { display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }
+  }, [
+    React.createElement(PrimaryButton, { key: 'contained-disabled', disabled: true }, 'Contained Disabled'),
+    React.createElement(OutlinedPrimaryButton, { key: 'outlined-disabled', disabled: true }, 'Outlined Disabled'),
+    React.createElement(TextPrimaryButton, { key: 'text-disabled', disabled: true }, 'Text Disabled')
+  ]);
