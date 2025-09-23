@@ -32,17 +32,12 @@ const StyledButton = styled(Button)<{ size?: "small" | "medium" | "large" }>(({ 
     boxShadow: "none",
     "&:hover": {
       backgroundColor: brand[400],
-      borderColor: "#0062cc",
       boxShadow: "none",
     },
     "&:active": {
-      boxShadow: "none",
-      backgroundColor: "#387CBB",
-      borderColor: "#90C4FB",
-    },
-    "&:focus": {
-      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
-    },
+          backgroundColor: brand[300], 
+          color: neutral.white,
+        },
   };
 });
 
@@ -54,6 +49,7 @@ export const PrimaryButton = ({
   return (
     <StyledButton 
       variant="contained" 
+      disableRipple 
       disableElevation 
       size={size}
       {...props}
