@@ -14,6 +14,7 @@ export const TextPrimaryButton = ({
   return (
     <Button
       variant="text"
+      disableRipple
       sx={{
         color: brand[500],
         fontFamily: typography.fontFamily,
