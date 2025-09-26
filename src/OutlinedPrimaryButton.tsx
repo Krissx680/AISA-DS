@@ -1,5 +1,6 @@
 import { Button, ButtonProps } from "@mui/material";
-import { brand, neutral } from "./theme/colorTokens";
+import { brand, neutral, gray } from "./theme/colorTokens";
+import { typography } from "./typography";
 
 interface OutlinedPrimaryButtonProps extends ButtonProps {
   children: React.ReactNode;
@@ -23,6 +24,18 @@ export const OutlinedPrimaryButton = ({
     }
   };
 
+  const getTypography = () => {
+    switch (size) {
+      case "small":
+        return typography["button.Small"];
+      case "large":
+        return typography["button.Large"];
+      case "medium":
+      default:
+        return typography["button.Medium"];
+    }
+  };
+
   return (
     <Button
       variant="outlined"
@@ -31,10 +44,8 @@ export const OutlinedPrimaryButton = ({
       sx={{
         border: "1.5px solid #0068A9",
         color: "#0068A9",
-        fontFamily: "Open Sans, sans-serif",
-        fontWeight: 500,
-        fontSize: "18px",
-        lineHeight: "22px",
+        fontFamily: typography.fontFamily,
+        ...getTypography(),
         textTransform: "none",
         borderRadius: "8px",
         padding: getPadding(),
@@ -54,6 +65,11 @@ export const OutlinedPrimaryButton = ({
         "&:focus": {
           outline: "none",
           boxShadow: "none",
+        },
+        "&:disabled": {
+          backgroundColor: "transparent",
+          borderColor: gray[200],
+          color: gray[400],
         },
       }}
       {...props}

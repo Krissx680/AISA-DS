@@ -1,6 +1,7 @@
 import { Button, ButtonProps } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { brand, neutral } from "./theme/colorTokens";
+import { brand, neutral, gray } from "./theme/colorTokens";
+import { typography } from "./typography";
 
 interface PrimaryButtonProps extends ButtonProps {
   children: React.ReactNode;
@@ -19,13 +20,23 @@ const StyledButton = styled(Button)<{ size?: "small" | "medium" | "large" }>(({ 
     }
   };
 
+  const getTypography = () => {
+    switch (size) {
+      case "small":
+        return typography["button.Small"];
+      case "large":
+        return typography["button.Large"];
+      case "medium":
+      default:
+        return typography["button.Medium"];
+    }
+  };
+
   return {
     backgroundColor: brand[500],
     color: neutral.white,
-    fontFamily: "Open Sans, sans-serif",
-    fontWeight: 500,
-    fontSize: "18px",
-    lineHeight: "22px",
+    fontFamily: typography.fontFamily,
+    ...getTypography(),
     textTransform: "none",
     borderRadius: "8px",
     padding: getPadding(),
@@ -35,9 +46,14 @@ const StyledButton = styled(Button)<{ size?: "small" | "medium" | "large" }>(({ 
       boxShadow: "none",
     },
     "&:active": {
-          backgroundColor: brand[300], 
-          color: neutral.white,
-        },
+      backgroundColor: brand[300], 
+      color: neutral.white,
+    },
+     "&:disabled": {
+      backgroundColor: gray[200], // gray 200
+      color: gray[400], // gray 400
+      borderColor: "transparent",
+    },
   };
 });
 

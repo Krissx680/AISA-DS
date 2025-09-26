@@ -2,15 +2,40 @@ import { Button, ButtonProps } from "@mui/material";
 import { typography } from "./typography";
 import { brand, neutral } from "./theme/colorTokens";
 
-
 interface TextPrimaryButtonProps extends ButtonProps {
   children: React.ReactNode;
 }
 
 export const TextPrimaryButton = ({
   children,
+  size = "medium",
   ...props
 }: TextPrimaryButtonProps) => {
+  
+  const getPadding = () => {
+    switch (size) {
+      case "small":
+        return "8px 16px"; 
+      case "large":
+        return "12px 24px"; 
+      case "medium":
+      default:
+        return "10px 20px"; 
+    }
+  };
+
+  const getTypography = () => {
+    switch (size) {
+      case "small":
+        return typography["button.Small"];
+      case "large":
+        return typography["button.Large"];
+      case "medium":
+      default:
+        return typography["button.Medium"];
+    }
+  };
+
   return (
     <Button
       variant="text"
@@ -18,10 +43,10 @@ export const TextPrimaryButton = ({
       sx={{
         color: brand[500],
         fontFamily: typography.fontFamily,
-        ...typography["button.Large"],
+        ...getTypography(),
         textTransform: "none",
         borderRadius: "8px",
-        padding: "12px 24px",
+        padding: getPadding(),
         backgroundColor: "transparent",
         boxShadow: "none",
          "&:hover": {
