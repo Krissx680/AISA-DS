@@ -4,11 +4,13 @@ import { brand, neutral } from "./theme/colorTokens";
 
 interface TextPrimaryButtonProps extends ButtonProps {
   children: React.ReactNode;
+  startIcon?: React.ReactNode;
 }
 
 export const TextPrimaryButton = ({
   children,
   size = "medium",
+  startIcon,
   ...props
 }: TextPrimaryButtonProps) => {
   
@@ -40,6 +42,7 @@ export const TextPrimaryButton = ({
     <Button
       variant="text"
       disableRipple
+      startIcon={startIcon}
       sx={{
         color: brand[500],
         fontFamily: typography.fontFamily,
@@ -49,6 +52,9 @@ export const TextPrimaryButton = ({
         padding: getPadding(),
         backgroundColor: "transparent",
         boxShadow: "none",
+        "& .MuiButton-startIcon": {
+          marginRight: "8px",
+        },
          "&:hover": {
           backgroundColor: "rgba(188, 217, 255, 0.3)", 
           color: brand[300], 

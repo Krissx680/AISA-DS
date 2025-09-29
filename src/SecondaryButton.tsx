@@ -5,6 +5,7 @@ import { typography } from "./typography";
 
 interface SecondaryButtonProps extends ButtonProps {
   children: React.ReactNode;
+  startIcon?: React.ReactNode;
 }
 
 const StyledSecondaryButton = styled(Button)<{ size?: "small" | "medium" | "large" }>(({ theme, size }) => {
@@ -18,6 +19,10 @@ const StyledSecondaryButton = styled(Button)<{ size?: "small" | "medium" | "larg
       default:
         return "10px 20px";
     }
+  };
+
+  const getIconSpacing = () => {
+    return "8px";
   };
 
   const getTypography = () => {
@@ -38,6 +43,9 @@ const StyledSecondaryButton = styled(Button)<{ size?: "small" | "medium" | "larg
     fontFamily: typography.fontFamily,
     ...getTypography(),
     textTransform: "none",
+    "& .MuiButton-startIcon": {
+      marginRight: getIconSpacing(),
+    },
     borderRadius: "8px",
     padding: getPadding(),
     boxShadow: "none",
@@ -61,7 +69,8 @@ const StyledSecondaryButton = styled(Button)<{ size?: "small" | "medium" | "larg
 
 export const SecondaryButton = ({ 
   children, 
-  size = "medium", 
+  size = "medium",
+  startIcon,
   ...props 
 }: SecondaryButtonProps) => {
   return (
@@ -70,6 +79,7 @@ export const SecondaryButton = ({
       disableRipple 
       disableElevation 
       size={size}
+      startIcon={startIcon}
       {...props}
     >
       {children}

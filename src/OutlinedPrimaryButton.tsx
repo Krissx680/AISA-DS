@@ -4,11 +4,13 @@ import { typography } from "./typography";
 
 interface OutlinedPrimaryButtonProps extends ButtonProps {
   children: React.ReactNode;
+  startIcon?: React.ReactNode;
 }
 
 export const OutlinedPrimaryButton = ({
   children,
   size = "medium",
+  startIcon,
   ...props
 }: OutlinedPrimaryButtonProps) => {
 
@@ -41,6 +43,7 @@ export const OutlinedPrimaryButton = ({
       variant="outlined"
       size={size}
       disableRipple
+      startIcon={startIcon}
       sx={{
         border: `1.5px solid ${brand[300]}`,
         color: brand[500],
@@ -51,6 +54,9 @@ export const OutlinedPrimaryButton = ({
         padding: getPadding(),
         backgroundColor: "transparent",
         boxShadow: "none",
+        "& .MuiButton-startIcon": {
+          marginRight: "8px",
+        },
        "&:hover": {
           backgroundColor: "rgba(188, 217, 255, 0.3)", 
           borderColor: brand[300], 

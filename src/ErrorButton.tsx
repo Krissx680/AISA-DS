@@ -5,6 +5,7 @@ import { typography } from "./typography";
 
 interface ErrorButtonProps extends ButtonProps {
   children: React.ReactNode;
+  startIcon?: React.ReactNode;
 }
 
 const StyledErrorButton = styled(Button)<{ size?: "small" | "medium" | "large" }>(({ theme, size }) => {
@@ -18,6 +19,10 @@ const StyledErrorButton = styled(Button)<{ size?: "small" | "medium" | "large" }
       default:
         return "10px 20px";
     }
+  };
+
+  const getIconSpacing = () => {
+    return "8px";
   };
 
   const getTypography = () => {
@@ -38,6 +43,9 @@ const StyledErrorButton = styled(Button)<{ size?: "small" | "medium" | "large" }
     fontFamily: typography.fontFamily,
     ...getTypography(),
     textTransform: "none",
+    "& .MuiButton-startIcon": {
+      marginRight: getIconSpacing(),
+    },
     borderRadius: "8px",
     padding: getPadding(),
     boxShadow: "none",
@@ -59,7 +67,8 @@ const StyledErrorButton = styled(Button)<{ size?: "small" | "medium" | "large" }
 
 export const ErrorButton = ({ 
   children, 
-  size = "medium", 
+  size = "medium",
+  startIcon,
   ...props 
 }: ErrorButtonProps) => {
   return (
@@ -68,6 +77,7 @@ export const ErrorButton = ({
       disableRipple 
       disableElevation 
       size={size}
+      startIcon={startIcon}
       {...props}
     >
       {children}

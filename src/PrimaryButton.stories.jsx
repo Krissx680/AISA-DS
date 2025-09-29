@@ -4,6 +4,7 @@ import { OutlinedPrimaryButton } from './OutlinedPrimaryButton';
 import { TextPrimaryButton } from './TextPrimaryButton';
 import { SecondaryButton } from './SecondaryButton';
 import { Button } from "@mui/material";
+import { Add, Delete, Edit, Check, Error } from '@mui/icons-material';
 import { error, success, neutral, gray } from "./theme/colorTokens";
 import { typography } from "./typography";
 
@@ -31,11 +32,15 @@ export default {
       control: { type: 'text' },
       description: 'Button content',
     },
+    hasStartIcon: {
+      control: { type: 'boolean' },
+      description: 'Whether to show a start icon',
+    },
   },
 };
 
 // Error Button Component (inline for story)
-const ErrorButton = ({ children, size = 'medium', disabled = false, ...props }) => {
+const ErrorButton = ({ children, size = 'medium', disabled = false, startIcon, ...props }) => {
   const getPadding = () => {
     switch (size) {
       case "small": return "8px 16px";
@@ -60,6 +65,7 @@ const ErrorButton = ({ children, size = 'medium', disabled = false, ...props }) 
     disableElevation: true,
     size: size,
     disabled: disabled,
+    startIcon: startIcon,
     sx: {
       backgroundColor: error[500],
       color: neutral.white,
@@ -88,7 +94,7 @@ const ErrorButton = ({ children, size = 'medium', disabled = false, ...props }) 
 };
 
 // Success Button Component (inline for story)
-const SuccessButton = ({ children, size = 'medium', disabled = false, ...props }) => {
+const SuccessButton = ({ children, size = 'medium', disabled = false, startIcon, ...props }) => {
   const getPadding = () => {
     switch (size) {
       case "small": return "8px 16px";
@@ -113,6 +119,7 @@ const SuccessButton = ({ children, size = 'medium', disabled = false, ...props }
     disableElevation: true,
     size: size,
     disabled: disabled,
+    startIcon: startIcon,
     sx: {
       backgroundColor: success[500],
       color: neutral.white,
@@ -142,11 +149,23 @@ const SuccessButton = ({ children, size = 'medium', disabled = false, ...props }
 
 // Interactive Template with Controls
 const Template = (args) => {
-  const { variant, children, size, disabled, ...otherProps } = args;
+  const { variant, children, size, disabled, hasStartIcon, ...otherProps } = args;
+  
+  const getStartIcon = () => {
+    if (!hasStartIcon) return undefined;
+    switch (variant) {
+      case 'contained-error': return React.createElement(Error);
+      case 'contained-success': return React.createElement(Check);
+      case 'outlined-primary': return React.createElement(Edit);
+      case 'contained-secondary': return React.createElement(Delete);
+      default: return React.createElement(Add);
+    }
+  };
   
   const commonProps = {
     size,
     disabled,
+    startIcon: getStartIcon(),
     ...otherProps
   };
   
@@ -174,6 +193,7 @@ Playground.args = {
   size: 'medium',
   disabled: false,
   children: 'Button',
+  hasStartIcon: false,
 };
 
 // All Button Variants Showcase
@@ -196,9 +216,9 @@ export const AllButtons = () =>
         key: 'primary-buttons',
         style: { display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }
       }, [
-        React.createElement(PrimaryButton, { key: 'contained' }, 'Contained Primary'),
-        React.createElement(OutlinedPrimaryButton, { key: 'outlined' }, 'Outlined Primary'),
-        React.createElement(TextPrimaryButton, { key: 'text' }, 'Text Primary')
+        React.createElement(PrimaryButton, { key: 'contained', startIcon: React.createElement(Add) }, 'Contained Primary'),
+        React.createElement(OutlinedPrimaryButton, { key: 'outlined', startIcon: React.createElement(Edit) }, 'Outlined Primary'),
+        React.createElement(TextPrimaryButton, { key: 'text', startIcon: React.createElement(Add) }, 'Text Primary')
       ])
     ]),
     
@@ -212,7 +232,7 @@ export const AllButtons = () =>
         key: 'secondary-button',
         style: { display: 'flex', gap: '16px' }
       }, [
-        React.createElement(SecondaryButton, { key: 'secondary' }, 'Contained Secondary')
+        React.createElement(SecondaryButton, { key: 'secondary', startIcon: React.createElement(Delete) }, 'Contained Secondary')
       ])
     ]),
     
@@ -226,8 +246,8 @@ export const AllButtons = () =>
         key: 'status-buttons',
         style: { display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }
       }, [
-        React.createElement(ErrorButton, { key: 'error' }, 'Contained Error'),
-        React.createElement(SuccessButton, { key: 'success' }, 'Contained Success')
+        React.createElement(ErrorButton, { key: 'error', startIcon: React.createElement(Error) }, 'Contained Error'),
+        React.createElement(SuccessButton, { key: 'success', startIcon: React.createElement(Check) }, 'Contained Success')
       ])
     ])
   ]);

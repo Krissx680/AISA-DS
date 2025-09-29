@@ -1,6 +1,28 @@
 export const typography = {
   fontFamily: '"Open Sans", sans-serif',
   
+  // Body 1 Variants
+  "body1.Regular": {
+    fontSize: "1rem", // 16px
+    lineHeight: "1.5rem", // 24px
+    letterSpacing: "0em",
+    fontWeight: 400,
+  },
+  "body1.Semibold": {
+    fontSize: "1rem",
+    lineHeight: "1.5rem",
+    letterSpacing: "0em",
+    fontWeight: 600,
+  },
+  
+  // Body 2 Variants
+  "body2.Regular": {
+    fontSize: "0.875rem", // 14px
+    lineHeight: "1.25rem", // 20px
+    letterSpacing: "0em",
+    fontWeight: 400,
+  },
+  
   // H1 Variants
   "h1.Light": {
     fontSize: "4.5rem", // 72px
