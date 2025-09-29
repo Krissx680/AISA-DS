@@ -1,6 +1,6 @@
 import { Button, ButtonProps } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { neutral } from "./theme/colorTokens";
+import { neutral, error, gray } from "./theme/colorTokens";
 import { typography } from "./typography";
 
 interface ErrorButtonProps extends ButtonProps {
@@ -33,7 +33,7 @@ const StyledErrorButton = styled(Button)<{ size?: "small" | "medium" | "large" }
   };
 
   return {
-    backgroundColor: "#DC2626", // red 600
+    backgroundColor: error[500], 
     color: neutral.white,
     fontFamily: typography.fontFamily,
     ...getTypography(),
@@ -42,16 +42,16 @@ const StyledErrorButton = styled(Button)<{ size?: "small" | "medium" | "large" }
     padding: getPadding(),
     boxShadow: "none",
     "&:hover": {
-      backgroundColor: "#B91C1C", // red 700
+      backgroundColor: error[400], 
       boxShadow: "none",
     },
     "&:active": {
-      backgroundColor: "#991B1B", // red 800
+      backgroundColor: error[300], 
       color: neutral.white,
     },
     "&:disabled": {
-      backgroundColor: "#E5E7EB", // gray 200
-      color: "#9CA3AF", // gray 400
+      backgroundColor: gray[200], 
+      color: gray[400], 
       borderColor: "transparent",
     },
   };

@@ -1,6 +1,6 @@
 import { Button, ButtonProps } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { neutral } from "./theme/colorTokens";
+import { neutral, success } from "./theme/colorTokens";
 import { typography } from "./typography";
 
 interface SuccessButtonProps extends ButtonProps {
@@ -33,7 +33,7 @@ const StyledSuccessButton = styled(Button)<{ size?: "small" | "medium" | "large"
   };
 
   return {
-    backgroundColor: "#16A34A", // green 600
+    backgroundColor: success[500], 
     color: neutral.white,
     fontFamily: typography.fontFamily,
     ...getTypography(),
@@ -42,11 +42,11 @@ const StyledSuccessButton = styled(Button)<{ size?: "small" | "medium" | "large"
     padding: getPadding(),
     boxShadow: "none",
     "&:hover": {
-      backgroundColor: "#15803D", // green 700
+      backgroundColor: success[400], // green 700
       boxShadow: "none",
     },
     "&:active": {
-      backgroundColor: "#166534", // green 800
+      backgroundColor: success[300], // green 800
       color: neutral.white,
     },
     "&:disabled": {

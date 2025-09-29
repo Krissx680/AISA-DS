@@ -42,8 +42,8 @@ export const OutlinedPrimaryButton = ({
       size={size}
       disableRipple
       sx={{
-        border: "1.5px solid #0068A9",
-        color: "#0068A9",
+        border: `1.5px solid ${brand[300]}`,
+        color: brand[500],
         fontFamily: typography.fontFamily,
         ...getTypography(),
         textTransform: "none",

@@ -33,25 +33,27 @@ const StyledSecondaryButton = styled(Button)<{ size?: "small" | "medium" | "larg
   };
 
   return {
-    backgroundColor: gray[50], // gray 500
-    color: neutral.white,
+    backgroundColor: gray[100],
+    color: gray[800],
     fontFamily: typography.fontFamily,
     ...getTypography(),
     textTransform: "none",
     borderRadius: "8px",
     padding: getPadding(),
     boxShadow: "none",
+    border: `1.5px solid ${gray[300]}`,
     "&:hover": {
-      backgroundColor: gray[100], // gray 600
+      backgroundColor: gray[200],
       boxShadow: "none",
+      border: `1.5px solid ${gray[400]}`,
     },
     "&:active": {
-      backgroundColor: "#374151", // gray 700
-      color: neutral.white,
+      backgroundColor: gray[300],
+      border: `1.5px solid ${gray[400]}`,
     },
     "&:disabled": {
-      backgroundColor: gray[200], // gray 200
-      color: gray[400], // gray 400
+      backgroundColor: gray[200],
+      color: gray[400],
       borderColor: "transparent",
     },
   };
