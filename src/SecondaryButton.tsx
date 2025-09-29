@@ -33,7 +33,7 @@ const StyledSecondaryButton = styled(Button)<{ size?: "small" | "medium" | "larg
   };
 
   return {
-    backgroundColor: gray[100],
+    backgroundColor: gray[50],
     color: gray[800],
     fontFamily: typography.fontFamily,
     ...getTypography(),
@@ -43,12 +43,12 @@ const StyledSecondaryButton = styled(Button)<{ size?: "small" | "medium" | "larg
     boxShadow: "none",
     border: `1.5px solid ${gray[300]}`,
     "&:hover": {
-      backgroundColor: gray[200],
+      backgroundColor: gray[100],
       boxShadow: "none",
       border: `1.5px solid ${gray[400]}`,
     },
     "&:active": {
-      backgroundColor: gray[300],
+      backgroundColor: gray[200],
       border: `1.5px solid ${gray[400]}`,
     },
     "&:disabled": {
