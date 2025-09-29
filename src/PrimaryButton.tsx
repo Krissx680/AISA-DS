@@ -50,8 +50,8 @@ const StyledButton = styled(Button)<{ size?: "small" | "medium" | "large" }>(({ 
       color: neutral.white,
     },
      "&:disabled": {
-      backgroundColor: gray[200], // gray 200
-      color: gray[400], // gray 400
+      backgroundColor: gray[200], 
+      color: gray[400], 
       borderColor: "transparent",
     },
   };
