@@ -1,15 +1,22 @@
 import React from 'react';
+import { PrimaryButton } from './PrimaryButton';
+import { OutlinedPrimaryButton } from './OutlinedPrimaryButton';
+import { TextPrimaryButton } from './TextPrimaryButton';
+import { SecondaryButton } from './SecondaryButton';
+import { Button } from "@mui/material";
+import { error, success, neutral, gray } from "./theme/colorTokens";
+import { typography } from "./typography";
 
 export default {
-  title: 'Components/Buttons/Primary',
+  title: 'Components/Buttons',
   parameters: {
     layout: 'centered',
   },
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['contained', 'outlined', 'text'],
-      description: 'Visual style variant of the button',
+      options: ['contained-primary', 'outlined-primary', 'text-primary', 'contained-secondary', 'contained-error', 'contained-success'],
+      description: 'Button variant',
     },
     size: {
       control: { type: 'select' },
@@ -24,129 +31,203 @@ export default {
       control: { type: 'text' },
       description: 'Button content',
     },
-    onClick: { action: 'clicked' },
   },
 };
 
-import { PrimaryButton } from './PrimaryButton';
-import { OutlinedPrimaryButton } from './OutlinedPrimaryButton';
-import { TextPrimaryButton } from './TextPrimaryButton';
+// Error Button Component (inline for story)
+const ErrorButton = ({ children, size = 'medium', disabled = false, ...props }) => {
+  const getPadding = () => {
+    switch (size) {
+      case "small": return "8px 16px";
+      case "large": return "12px 24px";
+      case "medium":
+      default: return "10px 20px";
+    }
+  };
 
+  const getTypography = () => {
+    switch (size) {
+      case "small": return typography["button.Small"];
+      case "large": return typography["button.Large"];
+      case "medium":
+      default: return typography["button.Medium"];
+    }
+  };
+
+  return React.createElement(Button, {
+    variant: "contained",
+    disableRipple: true,
+    disableElevation: true,
+    size: size,
+    disabled: disabled,
+    sx: {
+      backgroundColor: error[500],
+      color: neutral.white,
+      fontFamily: typography.fontFamily,
+      ...getTypography(),
+      textTransform: "none",
+      borderRadius: "8px",
+      padding: getPadding(),
+      boxShadow: "none",
+      "&:hover": {
+        backgroundColor: error[400],
+        boxShadow: "none",
+      },
+      "&:active": {
+        backgroundColor: error[300],
+        color: neutral.white,
+      },
+      "&:disabled": {
+        backgroundColor: gray[200],
+        color: gray[400],
+        borderColor: "transparent",
+      },
+    },
+    ...props
+  }, children);
+};
+
+// Success Button Component (inline for story)
+const SuccessButton = ({ children, size = 'medium', disabled = false, ...props }) => {
+  const getPadding = () => {
+    switch (size) {
+      case "small": return "8px 16px";
+      case "large": return "12px 24px";
+      case "medium":
+      default: return "10px 20px";
+    }
+  };
+
+  const getTypography = () => {
+    switch (size) {
+      case "small": return typography["button.Small"];
+      case "large": return typography["button.Large"];
+      case "medium":
+      default: return typography["button.Medium"];
+    }
+  };
+
+  return React.createElement(Button, {
+    variant: "contained",
+    disableRipple: true,
+    disableElevation: true,
+    size: size,
+    disabled: disabled,
+    sx: {
+      backgroundColor: success[500],
+      color: neutral.white,
+      fontFamily: typography.fontFamily,
+      ...getTypography(),
+      textTransform: "none",
+      borderRadius: "8px",
+      padding: getPadding(),
+      boxShadow: "none",
+      "&:hover": {
+        backgroundColor: success[400],
+        boxShadow: "none",
+      },
+      "&:active": {
+        backgroundColor: success[300],
+        color: neutral.white,
+      },
+      "&:disabled": {
+        backgroundColor: gray[200],
+        color: gray[400],
+        borderColor: "transparent",
+      },
+    },
+    ...props
+  }, children);
+};
+
+// Interactive Template with Controls
 const Template = (args) => {
-  const { variant, children, size, disabled, onClick, ...otherProps } = args;
+  const { variant, children, size, disabled, ...otherProps } = args;
   
   const commonProps = {
     size,
     disabled,
-    onClick,
     ...otherProps
   };
   
   switch (variant) {
-    case 'outlined':
+    case 'outlined-primary':
       return React.createElement(OutlinedPrimaryButton, commonProps, children);
-    case 'text':
+    case 'text-primary':
       return React.createElement(TextPrimaryButton, commonProps, children);
-    case 'contained':
+    case 'contained-secondary':
+      return React.createElement(SecondaryButton, commonProps, children);
+    case 'contained-error':
+      return React.createElement(ErrorButton, commonProps, children);
+    case 'contained-success':
+      return React.createElement(SuccessButton, commonProps, children);
+    case 'contained-primary':
     default:
       return React.createElement(PrimaryButton, commonProps, children);
   }
 };
 
+// Interactive Story with Controls
+export const Playground = Template.bind({});
+Playground.args = {
+  variant: 'contained-primary',
+  size: 'medium',
+  disabled: false,
+  children: 'Button',
+};
 
-// Individual variant stories
-export const Contained = () => 
-  React.createElement(PrimaryButton, { size: 'medium' }, 'Contained Primary');
-
-export const Outlined = () => 
-  React.createElement(OutlinedPrimaryButton, { size: 'medium' }, 'Outlined Primary');
-
-export const Text = () => 
-  React.createElement(TextPrimaryButton, { size: 'medium' }, 'Text Primary');
-
-// All variants showcase
-export const AllVariants = () => 
+// All Button Variants Showcase
+export const AllButtons = () => 
   React.createElement('div', {
-    style: { display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }
+    style: { 
+      display: 'flex', 
+      flexDirection: 'column',
+      gap: '32px',
+      padding: '20px'
+    }
   }, [
-    React.createElement(PrimaryButton, { key: 'contained' }, 'Contained'),
-    React.createElement(OutlinedPrimaryButton, { key: 'outlined' }, 'Outlined'),
-    React.createElement(TextPrimaryButton, { key: 'text' }, 'Text')
-  ]);
-
-// Size variants for all button types
-export const AllSizes = () => 
-  React.createElement('div', {
-    style: { display: 'flex', flexDirection: 'column', gap: '24px' }
-  }, [
-    // Small buttons
-    React.createElement('div', {
-      key: 'small-section',
-      style: { display: 'flex', gap: '16px', alignItems: 'center' }
-    }, [
-      React.createElement('span', { key: 'small-label', style: { minWidth: '60px', fontWeight: 'bold' } },),
-      React.createElement(PrimaryButton, { key: 'contained-small', size: 'small' }, 'Contained'),
-      React.createElement(OutlinedPrimaryButton, { key: 'outlined-small', size: 'small' }, 'Outlined'),
-      React.createElement(TextPrimaryButton, { key: 'text-small', size: 'small' }, 'Text')
+    // Primary Buttons Section
+    React.createElement('div', { key: 'primary-section' }, [
+      React.createElement('h3', { 
+        key: 'primary-title',
+        style: { marginBottom: '16px', color: '#333', fontFamily: '"Open Sans", sans-serif' }
+      }, 'Primary Buttons'),
+      React.createElement('div', {
+        key: 'primary-buttons',
+        style: { display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }
+      }, [
+        React.createElement(PrimaryButton, { key: 'contained' }, 'Contained Primary'),
+        React.createElement(OutlinedPrimaryButton, { key: 'outlined' }, 'Outlined Primary'),
+        React.createElement(TextPrimaryButton, { key: 'text' }, 'Text Primary')
+      ])
     ]),
-    // Medium buttons
-    React.createElement('div', {
-      key: 'medium-section',
-      style: { display: 'flex', gap: '16px', alignItems: 'center' }
-    }, [
-      React.createElement('span', { key: 'medium-label', style: { minWidth: '60px', fontWeight: 'bold' } },),
-      React.createElement(PrimaryButton, { key: 'contained-medium', size: 'medium' }, 'Contained'),
-      React.createElement(OutlinedPrimaryButton, { key: 'outlined-medium', size: 'medium' }, 'Outlined'),
-      React.createElement(TextPrimaryButton, { key: 'text-medium', size: 'medium' }, 'Text')
+    
+    // Secondary Button Section
+    React.createElement('div', { key: 'secondary-section' }, [
+      React.createElement('h3', { 
+        key: 'secondary-title',
+        style: { marginBottom: '16px', color: '#333', fontFamily: '"Open Sans", sans-serif' }
+      }, 'Secondary Button'),
+      React.createElement('div', {
+        key: 'secondary-button',
+        style: { display: 'flex', gap: '16px' }
+      }, [
+        React.createElement(SecondaryButton, { key: 'secondary' }, 'Contained Secondary')
+      ])
     ]),
-    // Large buttons
-    React.createElement('div', {
-      key: 'large-section',
-      style: { display: 'flex', gap: '16px', alignItems: 'center' }
-    }, [
-      React.createElement('span', { key: 'large-label', style: { minWidth: '60px', fontWeight: 'bold' } },),
-      React.createElement(PrimaryButton, { key: 'contained-large', size: 'large' }, 'Contained'),
-      React.createElement(OutlinedPrimaryButton, { key: 'outlined-large', size: 'large' }, 'Outlined'),
-      React.createElement(TextPrimaryButton, { key: 'text-large', size: 'large' }, 'Text')
+    
+    // Status Buttons Section
+    React.createElement('div', { key: 'status-section' }, [
+      React.createElement('h3', { 
+        key: 'status-title',
+        style: { marginBottom: '16px', color: '#333', fontFamily: '"Open Sans", sans-serif' }
+      }, 'Status Buttons'),
+      React.createElement('div', {
+        key: 'status-buttons',
+        style: { display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }
+      }, [
+        React.createElement(ErrorButton, { key: 'error' }, 'Contained Error'),
+        React.createElement(SuccessButton, { key: 'success' }, 'Contained Success')
+      ])
     ])
-  ]);
-
-// Size variants - Contained only
-export const ContainedSizes = () => 
-  React.createElement('div', {
-    style: { display: 'flex', gap: '16px', alignItems: 'center' }
-  }, [
-    React.createElement(PrimaryButton, { key: 'small', size: 'small' }, 'Small'),
-    React.createElement(PrimaryButton, { key: 'medium', size: 'medium' }, 'Medium'),
-    React.createElement(PrimaryButton, { key: 'large', size: 'large' }, 'Large')
-  ]);
-
-// Size variants - Outlined only
-export const OutlinedSizes = () => 
-  React.createElement('div', {
-    style: { display: 'flex', gap: '16px', alignItems: 'center' }
-  }, [
-    React.createElement(OutlinedPrimaryButton, { key: 'small', size: 'small' }, 'Small'),
-    React.createElement(OutlinedPrimaryButton, { key: 'medium', size: 'medium' }, 'Medium'),
-    React.createElement(OutlinedPrimaryButton, { key: 'large', size: 'large' }, 'Large')
-  ]);
-
-// Size variants - Text only
-export const TextSizes = () => 
-  React.createElement('div', {
-    style: { display: 'flex', gap: '16px', alignItems: 'center' }
-  }, [
-    React.createElement(TextPrimaryButton, { key: 'small', size: 'small' }, 'Small'),
-    React.createElement(TextPrimaryButton, { key: 'medium', size: 'medium' }, 'Medium'),
-    React.createElement(TextPrimaryButton, { key: 'large', size: 'large' }, 'Large')
-  ]);
-
-// Disabled states
-export const DisabledStates = () => 
-  React.createElement('div', {
-    style: { display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }
-  }, [
-    React.createElement(PrimaryButton, { key: 'contained-disabled', disabled: true }, 'Contained Disabled'),
-    React.createElement(OutlinedPrimaryButton, { key: 'outlined-disabled', disabled: true }, 'Outlined Disabled'),
-    React.createElement(TextPrimaryButton, { key: 'text-disabled', disabled: true }, 'Text Disabled')
   ]);
