@@ -101,6 +101,15 @@ export const typography = {
     fontWeight: 700,
   },
 
+  // Overline Variants
+  "Overline.button": {
+    fontSize: "0.875rem", // 14px
+    lineHeight: "1.5rem", // 24px
+    letterSpacing: "0em",
+    fontWeight: 600,
+    textTransform: "uppercase",
+  },
+
   // Button Variants
   "button.Small": {
     fontSize: "0.875rem", // 14px
