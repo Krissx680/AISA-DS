@@ -74,7 +74,7 @@ export const OutlinedPrimaryButton = ({
         },
         "&:disabled": {
           backgroundColor: "transparent",
-          borderColor: gray[200],
+          border: `1.5px solid ${gray[200]}`,
           color: gray[400],
         },
       }}
