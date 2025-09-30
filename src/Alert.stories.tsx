@@ -10,17 +10,9 @@ export default {
     docs: {
       description: {
         component: `
-# Alert Component
 
 The Alert component displays important messages to users with various severity levels and optional interactive elements.
 
-## Features
-
-- **Two Severity Types**: Error and Success states with appropriate color schemes
-- **Four Variants**: Simple, with title, with label button, or with both
-- **Typography Hierarchy**: Uses Body 1 Semibold for titles, Body 2 Regular for content, and Overline Button for action labels
-- **Interactive Labels**: Optional clickable label buttons for user actions
-- **Consistent Styling**: Follows design system color tokens and spacing
 
 ## Variants
 
@@ -34,52 +26,7 @@ The Alert component displays important messages to users with various severity l
 - **error**: Red color scheme for error messages
 - **success**: Green color scheme for success messages
 
-## Usage
 
-\`\`\`tsx
-import { Alert } from './Alert';
-
-// Simple alert
-<Alert severity="error">
-  This is a simple error message.
-</Alert>
-
-// Alert with title
-<Alert 
-  severity="success" 
-  title="Success!"
-  variant="withTitle"
->
-  Your file has been uploaded successfully.
-</Alert>
-
-// Alert with action button
-<Alert 
-  severity="error" 
-  label="RETRY NOW"
-  onLabelClick={() => console.log('Retry clicked')}
-  variant="withLabel"
->
-  Connection failed. Please try again.
-</Alert>
-
-// Full-featured alert
-<Alert 
-  severity="success" 
-  title="Upload Complete"
-  label="VIEW FILE"
-  onLabelClick={() => console.log('View file clicked')}
-  variant="withTitleAndLabel"
->
-  Your document has been successfully uploaded.
-</Alert>
-\`\`\`
-
-## Accessibility
-
-- Uses semantic HTML with proper ARIA roles
-- Color is not the only indicator of severity (icons are included)
-- Label buttons are keyboard accessible and have proper focus states
         `,
       },
     },
