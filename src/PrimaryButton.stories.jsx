@@ -17,7 +17,7 @@ export default {
     docs: {
       description: {
         component: `
-# Button Components
+
 
 A comprehensive set of button components following the design system standards, built on Material-UI with custom styling.
 
@@ -29,20 +29,6 @@ The button library includes multiple variants to cover different use cases and v
 - **Secondary Button**: Alternative actions with neutral styling  
 - **Status Buttons**: Error and success states for contextual actions
 
-## Button Variants
-
-### Primary Buttons
-- **Contained Primary**: High-emphasis button for primary actions (brand blue)
-- **Outlined Primary**: Medium-emphasis button with border (brand blue outline)
-- **Text Primary**: Low-emphasis button for tertiary actions (brand blue text)
-
-### Secondary Button
-- **Contained Secondary**: Alternative actions with neutral gray styling
-
-### Status Buttons
-- **Error Button**: Destructive actions (red)
-- **Success Button**: Confirmations and positive actions (green)
-
 ## Sizes
 
 All buttons support three sizes:
@@ -50,47 +36,8 @@ All buttons support three sizes:
 - **Medium** (default): 10px vertical padding, 20px horizontal padding, 16px font size
 - **Large**: 12px vertical padding, 24px horizontal padding, 18px font size
 
-## Usage
 
-\`\`\`jsx
-import { PrimaryButton } from './PrimaryButton';
-import { OutlinedPrimaryButton } from './OutlinedPrimaryButton';
-import { Add, Delete } from '@mui/icons-material';
 
-// Primary contained button
-<PrimaryButton size="medium">
-  Click Me
-</PrimaryButton>
-
-// With icon
-<PrimaryButton startIcon={<Add />}>
-  Add Item
-</PrimaryButton>
-
-// Outlined variant
-<OutlinedPrimaryButton size="large" disabled>
-  Disabled
-</OutlinedPrimaryButton>
-\`\`\`
-
-## Best Practices
-
-1. Use **Contained Primary** for the most important action on a page
-2. Use **Outlined Primary** for secondary actions
-3. Use **Text Primary** for tertiary or less important actions
-4. Use **Error buttons** sparingly for destructive actions
-5. Use **Success buttons** for confirmations after positive actions
-6. Always provide meaningful button text
-7. Use icons to enhance understanding, not replace text
-8. Maintain consistent button sizes within the same context
-
-## Accessibility
-
-- Proper color contrast ratios for WCAG compliance
-- Clear hover and focus states
-- Disabled state styling for inactive buttons
-- Support for keyboard navigation
-- Icon + text combinations for better comprehension
         `,
       },
     },
@@ -404,70 +351,6 @@ export const DisabledStates = {
       description: {
         story: 'Disabled state for all button variants with reduced opacity and no hover effects.',
       },
-    },
-  },
-};
-
-// All Button Variants Showcase
-export const AllButtons = () => 
-  React.createElement('div', {
-    style: { 
-      display: 'flex', 
-      flexDirection: 'column',
-      gap: '32px',
-      padding: '20px'
-    }
-  }, [
-    // Primary Buttons Section
-    React.createElement('div', { key: 'primary-section' }, [
-      React.createElement('h3', { 
-        key: 'primary-title',
-        style: { marginBottom: '16px', color: '#333', fontFamily: '"Open Sans", sans-serif' }
-      }, 'Primary Buttons'),
-      React.createElement('div', {
-        key: 'primary-buttons',
-        style: { display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }
-      }, [
-        React.createElement(PrimaryButton, { key: 'contained', startIcon: React.createElement(Add) }, 'Contained Primary'),
-        React.createElement(OutlinedPrimaryButton, { key: 'outlined', startIcon: React.createElement(Edit) }, 'Outlined Primary'),
-        React.createElement(TextPrimaryButton, { key: 'text', startIcon: React.createElement(Add) }, 'Text Primary')
-      ])
-    ]),
-    
-    // Secondary Button Section
-    React.createElement('div', { key: 'secondary-section' }, [
-      React.createElement('h3', { 
-        key: 'secondary-title',
-        style: { marginBottom: '16px', color: '#333', fontFamily: '"Open Sans", sans-serif' }
-      }, 'Secondary Button'),
-      React.createElement('div', {
-        key: 'secondary-button',
-        style: { display: 'flex', gap: '16px' }
-      }, [
-        React.createElement(SecondaryButton, { key: 'secondary', startIcon: React.createElement(Delete) }, 'Contained Secondary')
-      ])
-    ]),
-    
-    // Status Buttons Section
-    React.createElement('div', { key: 'status-section' }, [
-      React.createElement('h3', { 
-        key: 'status-title',
-        style: { marginBottom: '16px', color: '#333', fontFamily: '"Open Sans", sans-serif' }
-      }, 'Status Buttons'),
-      React.createElement('div', {
-        key: 'status-buttons',
-        style: { display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }
-      }, [
-        React.createElement(ErrorButton, { key: 'error', startIcon: React.createElement(Error) }, 'Contained Error'),
-        React.createElement(SuccessButton, { key: 'success', startIcon: React.createElement(Check) }, 'Contained Success')
-      ])
-    ])
-  ]);
-
-AllButtons.parameters = {
-  docs: {
-    description: {
-      story: 'Complete showcase of all available button variants organized by category.',
     },
   },
 };
