@@ -10,31 +10,131 @@ import { typography } from "./typography";
 
 export default {
   title: 'Components/Buttons',
+  component: PrimaryButton,
+  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
+    docs: {
+      description: {
+        component: `
+# Button Components
+
+A comprehensive set of button components following the design system standards, built on Material-UI with custom styling.
+
+## Overview
+
+The button library includes multiple variants to cover different use cases and visual hierarchies:
+
+- **Primary Buttons**: Main call-to-action buttons in contained, outlined, and text variants
+- **Secondary Button**: Alternative actions with neutral styling  
+- **Status Buttons**: Error and success states for contextual actions
+
+## Button Variants
+
+### Primary Buttons
+- **Contained Primary**: High-emphasis button for primary actions (brand blue)
+- **Outlined Primary**: Medium-emphasis button with border (brand blue outline)
+- **Text Primary**: Low-emphasis button for tertiary actions (brand blue text)
+
+### Secondary Button
+- **Contained Secondary**: Alternative actions with neutral gray styling
+
+### Status Buttons
+- **Error Button**: Destructive actions (red)
+- **Success Button**: Confirmations and positive actions (green)
+
+## Sizes
+
+All buttons support three sizes:
+- **Small**: 8px vertical padding, 16px horizontal padding, 14px font size
+- **Medium** (default): 10px vertical padding, 20px horizontal padding, 16px font size
+- **Large**: 12px vertical padding, 24px horizontal padding, 18px font size
+
+## Usage
+
+\`\`\`jsx
+import { PrimaryButton } from './PrimaryButton';
+import { OutlinedPrimaryButton } from './OutlinedPrimaryButton';
+import { Add, Delete } from '@mui/icons-material';
+
+// Primary contained button
+<PrimaryButton size="medium">
+  Click Me
+</PrimaryButton>
+
+// With icon
+<PrimaryButton startIcon={<Add />}>
+  Add Item
+</PrimaryButton>
+
+// Outlined variant
+<OutlinedPrimaryButton size="large" disabled>
+  Disabled
+</OutlinedPrimaryButton>
+\`\`\`
+
+## Best Practices
+
+1. Use **Contained Primary** for the most important action on a page
+2. Use **Outlined Primary** for secondary actions
+3. Use **Text Primary** for tertiary or less important actions
+4. Use **Error buttons** sparingly for destructive actions
+5. Use **Success buttons** for confirmations after positive actions
+6. Always provide meaningful button text
+7. Use icons to enhance understanding, not replace text
+8. Maintain consistent button sizes within the same context
+
+## Accessibility
+
+- Proper color contrast ratios for WCAG compliance
+- Clear hover and focus states
+- Disabled state styling for inactive buttons
+- Support for keyboard navigation
+- Icon + text combinations for better comprehension
+        `,
+      },
+    },
   },
   argTypes: {
     variant: {
       control: { type: 'select' },
       options: ['contained-primary', 'outlined-primary', 'text-primary', 'contained-secondary', 'contained-error', 'contained-success'],
       description: 'Button variant',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'contained-primary' },
+      },
     },
     size: {
       control: { type: 'select' },
       options: ['small', 'medium', 'large'],
       description: 'Size of the button',
+      table: {
+        type: { summary: 'small | medium | large' },
+        defaultValue: { summary: 'medium' },
+      },
     },
     disabled: {
       control: { type: 'boolean' },
       description: 'Whether the button is disabled',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: false },
+      },
     },
     children: {
       control: { type: 'text' },
       description: 'Button content',
+      table: {
+        type: { summary: 'ReactNode' },
+      },
     },
-    hasStartIcon: {
+    startIcon: {
       control: { type: 'boolean' },
-      description: 'Whether to show a start icon',
+      description: 'Optional icon element to display before the button text',
+      table: {
+        type: { summary: 'ReactNode' },
+      },
     },
   },
 };
@@ -195,6 +295,118 @@ Playground.args = {
   children: 'Button',
   hasStartIcon: false,
 };
+Playground.parameters = {
+  docs: {
+    description: {
+      story: 'Interactive playground to experiment with all button variants and properties. Use the controls below to test different combinations of size, state, icons, and variants.',
+    },
+  },
+};
+
+// Primary Buttons
+export const ContainedPrimary = {
+  render: () => React.createElement(PrimaryButton, { startIcon: React.createElement(Add) }, 'Contained Primary'),
+  parameters: {
+    docs: {
+      description: {
+        story: 'High-emphasis button for primary actions. Uses brand blue color.',
+      },
+    },
+  },
+};
+
+export const OutlinedPrimary = {
+  render: () => React.createElement(OutlinedPrimaryButton, { startIcon: React.createElement(Edit) }, 'Outlined Primary'),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Medium-emphasis button with border. Good for secondary actions.',
+      },
+    },
+  },
+};
+
+export const TextPrimary = {
+  render: () => React.createElement(TextPrimaryButton, { startIcon: React.createElement(Add) }, 'Text Primary'),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Low-emphasis button for tertiary actions. Minimal visual weight.',
+      },
+    },
+  },
+};
+
+// Secondary Button
+export const ContainedSecondary = {
+  render: () => React.createElement(SecondaryButton, { startIcon: React.createElement(Delete) }, 'Contained Secondary'),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Alternative actions with neutral gray styling.',
+      },
+    },
+  },
+};
+
+// Status Buttons
+export const ContainedError = {
+  render: () => React.createElement(ErrorButton, { startIcon: React.createElement(Error) }, 'Contained Error'),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Destructive actions. Use sparingly for delete/remove operations.',
+      },
+    },
+  },
+};
+
+export const ContainedSuccess = {
+  render: () => React.createElement(SuccessButton, { startIcon: React.createElement(Check) }, 'Contained Success'),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Confirmations and positive actions. Good for save/submit operations.',
+      },
+    },
+  },
+};
+
+// Size Variants
+export const Sizes = {
+  render: () => React.createElement('div', {
+    style: { display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }
+  }, [
+    React.createElement(PrimaryButton, { key: '1', size: 'small' }, 'Small'),
+    React.createElement(PrimaryButton, { key: '2', size: 'medium' }, 'Medium'),
+    React.createElement(PrimaryButton, { key: '3', size: 'large' }, 'Large'),
+  ]),
+  parameters: {
+    docs: {
+      description: {
+        story: 'All buttons support three sizes: small (14px), medium (16px), and large (18px).',
+      },
+    },
+  },
+};
+
+// Disabled State
+export const DisabledStates = {
+  render: () => React.createElement('div', {
+    style: { display: 'flex', gap: '16px', flexWrap: 'wrap' }
+  }, [
+    React.createElement(PrimaryButton, { key: '1', disabled: true }, 'Disabled Primary'),
+    React.createElement(OutlinedPrimaryButton, { key: '2', disabled: true }, 'Disabled Outlined'),
+    React.createElement(SecondaryButton, { key: '3', disabled: true }, 'Disabled Secondary'),
+  ]),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Disabled state for all button variants with reduced opacity and no hover effects.',
+      },
+    },
+  },
+};
 
 // All Button Variants Showcase
 export const AllButtons = () => 
@@ -251,3 +463,11 @@ export const AllButtons = () =>
       ])
     ])
   ]);
+
+AllButtons.parameters = {
+  docs: {
+    description: {
+      story: 'Complete showcase of all available button variants organized by category.',
+    },
+  },
+};
