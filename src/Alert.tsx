@@ -24,7 +24,7 @@ const BaseAlert = styled(MuiAlert)<{ severity?: 'error' | 'success' }>(({ severi
   "& .MuiAlert-icon": {
     color: severity === 'success' ? success[500] : error[500],
     marginRight: "12px",
-    padding: "2px 0"
+    padding: "0px 2px"
   },
   "& .MuiAlert-message": {
     padding: "0"
